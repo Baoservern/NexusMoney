@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="description" content="Meu Dinheiro — finanças pessoais offline e privadas no seu dispositivo." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Meu Dinheiro" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Meu Dinheiro</title>
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <header class="topbar">
+      <div>
+        <span class="eyebrow">FINANÇAS PESSOAIS</span>
+        <h1>Meu Dinheiro</h1>
+      </div>
+      <div class="topbar-actions">
+        <button id="privacyBtn" class="icon-btn" aria-label="Ocultar valores" title="Ocultar valores">
+          <span class="icon" data-icon="eye"></span>
+        </button>
+        <button id="moreBtn" class="icon-btn" aria-label="Opções" title="Opções">
+          <span class="icon" data-icon="more"></span>
+        </button>
+      </div>
+    </header>
+
+    <main id="mainContent" class="main-content" tabindex="-1">
+      <section id="view-home" class="view active" data-view="home" aria-labelledby="homeTitle">
+        <div class="hero-copy">
+          <p id="greeting" class="muted"></p>
+          <h2 id="homeTitle">Visão geral das suas finanças</h2>
+        </div>
+
+        <div id="summaryCards" class="summary-scroll" aria-label="Resumo financeiro"></div>
+
+        <section class="panel">
+          <div class="section-title-row">
+            <div>
+              <span class="section-kicker">ESTE MÊS</span>
+              <h3>Gastos por categoria</h3>
+            </div>
+          </div>
+          <div id="donutChart" class="donut-wrap"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-title-row">
+            <div>
+              <span class="section-kicker">ÚLTIMOS 6 MESES</span>
+              <h3>Fluxo de caixa</h3>
+            </div>
+          </div>
+          <div id="cashFlowChart" class="cashflow-chart"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-title-row">
+            <div>
+              <span class="section-kicker">CONTROLE</span>
+              <h3>Tetos de gastos</h3>
+            </div>
+            <button class="mini-action" data-action="add-budget">+ Novo</button>
+          </div>
+          <div id="homeBudgets" class="stack-list"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-title-row">
+            <div>
+              <span class="section-kicker">OBJETIVOS</span>
+              <h3>Cofrinhos</h3>
+            </div>
+            <button class="mini-action" data-action="add-goal">+ Novo</button>
+          </div>
+          <div id="homeGoals" class="goal-grid"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-title-row">
+            <div>
+              <span class="section-kicker">ATIVIDADE</span>
+              <h3>Transações recentes</h3>
+            </div>
+            <button class="mini-action" data-nav="transactions">Ver todas</button>
+          </div>
+          <div id="recentTransactions" class="transaction-list"></div>
+        </section>
+      </section>
+
+      <section id="view-transactions" class="view" data-view="transactions" aria-labelledby="transactionsTitle">
+        <div class="page-title-row">
+          <div>
+            <span class="section-kicker">HISTÓRICO</span>
+            <h2 id="transactionsTitle">Lançamentos</h2>
+          </div>
+          <button class="primary-small" data-action="new-transaction">+ Lançar</button>
+        </div>
+        <div class="filter-row" role="group" aria-label="Filtrar transações">
+          <button class="filter-chip active" data-filter="all">Todas</button>
+          <button class="filter-chip" data-filter="income">Receitas</button>
+          <button class="filter-chip" data-filter="expense">Despesas</button>
+          <button class="filter-chip" data-filter="transfer">Transferências</button>
+        </div>
+        <div id="allTransactions" class="transaction-list panel padded-list"></div>
+      </section>
+
+      <section id="view-planning" class="view" data-view="planning" aria-labelledby="planningTitle">
+        <div class="hero-copy">
+          <span class="section-kicker">PLANEJAMENTO</span>
+          <h2 id="planningTitle">Orçamentos e metas</h2>
+        </div>
+        <section class="panel">
+          <div class="section-title-row">
+            <h3>Tetos mensais</h3>
+            <button class="mini-action" data-action="add-budget">+ Novo</button>
+          </div>
+          <div id="planningBudgets" class="stack-list"></div>
+        </section>
+        <section class="panel">
+          <div class="section-title-row">
+            <h3>Cofrinhos</h3>
+            <button class="mini-action" data-action="add-goal">+ Novo</button>
+          </div>
+          <div id="planningGoals" class="goal-grid"></div>
+        </section>
+      </section>
+
+      <section id="view-accounts" class="view" data-view="accounts" aria-labelledby="accountsTitle">
+        <div class="page-title-row">
+          <div>
+            <span class="section-kicker">CARTEIRAS</span>
+            <h2 id="accountsTitle">Minhas contas</h2>
+          </div>
+          <button class="primary-small" data-action="add-account">+ Conta</button>
+        </div>
+        <div id="accountsList" class="account-grid"></div>
+        <section class="panel data-tools">
+          <span class="section-kicker">DADOS LOCAIS</span>
+          <h3>Backup e privacidade</h3>
+          <p class="muted">Seus dados ficam somente neste navegador/dispositivo. Exporte um backup antes de limpar dados do navegador ou trocar de aparelho.</p>
+          <div class="tool-buttons">
+            <button id="exportBtn" class="secondary-btn">Exportar backup</button>
+            <button id="importBtn" class="secondary-btn">Importar backup</button>
+            <button id="resetBtn" class="danger-btn">Apagar todos os dados</button>
+          </div>
+          <input id="importFile" type="file" accept="application/json,.json" hidden />
+        </section>
+      </section>
+    </main>
+
+    <button id="fab" class="fab" aria-label="Novo lançamento" title="Novo lançamento"><span aria-hidden="true">+</span></button>
+
+    <nav class="bottom-nav" aria-label="Navegação principal">
+      <button class="nav-item active" data-nav="home"><span class="nav-icon" data-icon="home"></span><span>Início</span></button>
+      <button class="nav-item" data-nav="transactions"><span class="nav-icon" data-icon="list"></span><span>Lançamentos</span></button>
+      <button class="nav-spacer" tabindex="-1" aria-hidden="true"></button>
+      <button class="nav-item" data-nav="planning"><span class="nav-icon" data-icon="target"></span><span>Planejar</span></button>
+      <button class="nav-item" data-nav="accounts"><span class="nav-icon" data-icon="wallet"></span><span>Contas</span></button>
+    </nav>
+  </div>
+
+  <div id="sheetBackdrop" class="sheet-backdrop" hidden></div>
+  <section id="sheet" class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden>
+    <div class="sheet-handle" aria-hidden="true"></div>
+    <div class="sheet-header">
+      <h2 id="sheetTitle">Novo lançamento</h2>
+      <button id="sheetClose" class="icon-btn" aria-label="Fechar"><span class="icon" data-icon="close"></span></button>
+    </div>
+    <div id="sheetBody" class="sheet-body"></div>
+  </section>
+
+  <div id="menuBackdrop" class="menu-backdrop" hidden></div>
+  <div id="moreMenu" class="popover" hidden>
+    <button data-menu-action="add-account">Adicionar conta</button>
+    <button data-menu-action="export">Exportar backup</button>
+    <button data-menu-action="install" id="installMenuItem" hidden>Instalar aplicativo</button>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
